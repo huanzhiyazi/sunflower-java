@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.samples.apps.sunflower.data.FakeData;
 import com.google.samples.apps.sunflower.data.Plant;
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding;
 import com.google.samples.apps.sunflower.utilities.InjectorUtils;
@@ -45,8 +46,14 @@ public class PlantDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final FragmentPlantDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_plant_detail, container, false);
-        viewModel.plant().observe(getViewLifecycleOwner(), binding::setPlant);
-        viewModel.isPlanted().observe(getViewLifecycleOwner(), binding::setIsPlanted);
+        FakeData fakeData = new FakeData();
+        binding.setFakeData(fakeData);
+        fakeData.setViewModel(viewModel);
+        viewModel.plant().observe(getViewLifecycleOwner(), it -> fakeData.setViewModel(viewModel));
+        viewModel.isPlanted().observe(getViewLifecycleOwner(), it -> {
+            fakeData.setViewModel(viewModel);
+            fakeData.setName("default name");
+        });
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setCallback(plant -> {
             if (plant != null) {

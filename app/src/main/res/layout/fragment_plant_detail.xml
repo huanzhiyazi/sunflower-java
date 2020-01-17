@@ -20,11 +20,8 @@
 
     <data>
         <variable
-            name="plant"
-            type="com.google.samples.apps.sunflower.data.Plant" />
-        <variable
-            name="isPlanted"
-            type="Boolean" />
+            name="fakeData"
+            type="com.google.samples.apps.sunflower.data.FakeData" />
         <variable
             name="callback"
             type="com.google.samples.apps.sunflower.PlantDetailFragment.Callback" />
@@ -58,7 +55,7 @@
                 app:collapsedTitleGravity="center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{plant.name}"
+                app:title="@{fakeData.name}"
                 app:titleEnabled="false"
                 app:toolbarId="@id/toolbar">
 
@@ -69,7 +66,7 @@
                     android:contentDescription="@string/plant_detail_image_content_description"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    app:imageFromUrl="@{plant.imageUrl}"
+                    app:imageFromUrl="@{fakeData.plant.imageUrl}"
                     app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -107,7 +104,7 @@
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:gravity="center_horizontal"
-                    android:text="@{plant.name}"
+                    android:text="@{fakeData.plant.name}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +136,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/plant_watering_header"
-                    app:wateringText="@{plant.wateringInterval}"
+                    app:wateringText="@{fakeData.plant.wateringInterval}"
                     tools:text="every 7 days" />
 
                 <TextView
@@ -155,7 +152,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/plant_watering"
-                    app:renderHtml="@{plant.description}"
+                    app:renderHtml="@{fakeData.plant.description}"
                     tools:text="Details about the plant" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,10 +165,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> callback.add(plant)}"
+            android:onClick="@{() -> callback.add(fakeData.plant)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isGone="@{isPlanted}"
+            app:isGone="@{fakeData.isPlanted}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />

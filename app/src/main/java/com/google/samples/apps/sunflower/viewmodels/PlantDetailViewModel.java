@@ -43,6 +43,10 @@ public class PlantDetailViewModel extends ViewModel {
         return this.isPlanted;
     }
 
+    public Boolean getIsPlanted() {
+        return isPlanted != null && isPlanted.getValue() != null ? isPlanted.getValue() : false;
+    }
+
     public LiveData<Plant> plant() {
         if (this.plant == null) {
             this.plant = new MutableLiveData<>();
@@ -56,6 +60,10 @@ public class PlantDetailViewModel extends ViewModel {
         );
 
         return this.plant;
+    }
+
+    public Plant getPlant() {
+        return plant != null ? plant.getValue() : new Plant("", "", "", 0, 0, "");
     }
 
     public void addPlantToGarden() {
