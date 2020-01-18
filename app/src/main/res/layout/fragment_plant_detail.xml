@@ -155,6 +155,19 @@
                     app:renderHtml="@{fakeData.plant.description}"
                     tools:text="Details about the plant" />
 
+                <com.google.samples.apps.sunflower.views.FakeEditText
+                    android:id="@+id/plant_title_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:hint="type in title name"
+                    android:text="@={fakeData.name}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_description"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

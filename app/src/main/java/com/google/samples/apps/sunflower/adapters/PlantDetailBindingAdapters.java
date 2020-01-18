@@ -1,6 +1,7 @@
 package com.google.samples.apps.sunflower.adapters;
 
 import android.content.res.Resources;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.widget.ImageView;
@@ -8,11 +9,14 @@ import android.widget.TextView;
 
 import androidx.core.text.HtmlCompat;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.samples.apps.sunflower.R;
+import com.google.samples.apps.sunflower.views.FakeEditText;
 
 import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 
@@ -55,5 +59,23 @@ public final class PlantDetailBindingAdapters {
                 wateringInterval, wateringInterval);
 
         textView.setText(quantityString);
+    }
+
+    @BindingAdapter(value = "android:text", requireAll = false)
+    public static void setName(FakeEditText view, String name) {
+        if (!TextUtils.equals(view.getText(), name)) {
+            view.setText(name);
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "android:text", event = "textAttrChanged")
+    public static String getName(FakeEditText view) {
+        final Editable editable = view.getText();
+        return editable != null ? editable.toString() : null;
+    }
+
+    @BindingAdapter(value = {"textAttrChanged"}, requireAll = false)
+    public static void setTextAttrChanged(FakeEditText view, InverseBindingListener inverseBindingListener) {
+        view.setInverseBindingListener(inverseBindingListener);
     }
 }
